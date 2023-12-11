@@ -1,7 +1,9 @@
-NodeJS-Tutorial
-This is a basic nodejs tutorial repo where in each file , I learn the basics of NodeJS
+### NodeJS-Tutorial
+This is a basic nodejs tutorial repo.
+
 
 Commands to run:
+```bash
 npm install
-
-(to install node_modules and dependencies)
+```
+Use this command to install packages and dependencies
