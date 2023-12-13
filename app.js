@@ -1,16 +1,28 @@
-const {createReadStream} = require('fs')
+const http = require('http')
+const {readFileSync} = require('fs')
 
-const stream = createReadStream('./content/big.txt')
+const homepage = readFileSync('./express_tutorial/navbar-app/index.html')
 
-//default 64kb
-//last buffer remainder
-//highWaterMark - control size
-//const stream = createReadStream('./content/big.txt',{highWaterMark: 90000})
-//const stream = createReadStream('./content/big.txt',{endcoding:utf8})
-
-stream.on('data',(result)=>{
-    console.log(result)
+const server = http.createServer((req,res)=>{
+    //console.log(req.method)
+    const url = req.url;
+    console.log(url)
+    if(url === '/'){
+        res.writeHead(200,{'content-type':'text/html'})
+        res.write(homepage)
+        res.end()
+    }
+    else if(url === '/about'){
+        res.writeHead(200,{'content-type':'text/html'})
+        res.write('<h1>About</h1>')
+        res.end()
+    }
+    else{
+        res.writeHead(404,{'content-type':'text/html'})
+        res.write('<h1>Page not found</h1>')
+        res.end()
+    }
+    
 })
 
-stream.on('error',(err)=>console.log('error has occured'))
-
+server.listen(5000)
